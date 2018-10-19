@@ -1,0 +1,32 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: $m-size;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+}
+
+.is-active {
+  font-weight: bold;
+}
+
+.btn-orange {
+  background: #f19020;
+}
+
+.btn-orange:hover {
+  background: darken(#f19020, 5%);
+}
+
+.text-orange {
+  color: #f19020;
+}
