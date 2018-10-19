@@ -15,7 +15,7 @@ class Filters extends React.Component {
   render() {
     return (
       <div className="d-flex justify-content-between my-3">
-        <form className="btn-group btn-group-toggle px-5">
+        <form className="btn-group btn-group-toggle px-2">
           <label
             className={`btn btn-lg btn-primary ${
               this.props.sortBy === "earliest" ? "active" : ""
@@ -70,7 +70,7 @@ class Filters extends React.Component {
           </label>
         </form>
 
-        <p className="text-center text-secondary px-5">
+        <p className="text-center text-secondary px-2 d-none d-sm-block">
           {this.props.departures.length} Results
         </p>
       </div>

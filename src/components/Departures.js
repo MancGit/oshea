@@ -6,7 +6,7 @@ import getDepartures from "../selectors/departures";
 class Departures extends Component {
   render() {
     return (
-      <div className="container mt-3">
+      <div className="mt-3">
         {this.props.departures.map(departure => (
           <Departure key={departure.id} departure={departure} />
         ))}

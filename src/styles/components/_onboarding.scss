@@ -1,19 +1,4 @@
 #search {
-  position: relative;
-  min-height: 400px;
-  background: url("https://www.edmtunes.com/wp-content/uploads/2018/03/Osheaga-2017.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-
-  text-align: center;
-  color: #fff;
-}
-
-.dark-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
+  min-height: 275px;
+  background: linear-gradient(#127ccb, #5b8fa8);
 }

@@ -20,18 +20,16 @@ class Onboarding extends Component {
     return (
       <div>
         <div id="search">
-          <div className="dark-overlay">
-            <Header />
-            <Search
-              handleSearch={this.handleSearch}
-              searchInitiated={this.props.searchInitiated}
-              searchFinalised={this.props.searchFinalised}
-            />
-          </div>
+          <Header />
+          <Search
+            handleSearch={this.handleSearch}
+            searchInitiated={this.props.searchInitiated}
+            searchFinalised={this.props.searchFinalised}
+          />
         </div>
         {this.props.searchInitiated && <Loading />}
         {this.props.searchFinalised && (
-          <div>
+          <div className="container">
             <Filters />
             <Departures />
           </div>
