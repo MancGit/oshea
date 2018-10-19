@@ -19,7 +19,7 @@ export const searchDepartures = () => async dispatch => {
     config
   );
 
-  let lastReceivedDeparturesCount = searchResult.data.departures.length;
+  let receivedDeparturesCount = searchResult.data.departures.length;
 
   if (!searchResult.data.complete) {
     let pollResult, newLocations, newOperators;
@@ -27,14 +27,11 @@ export const searchDepartures = () => async dispatch => {
     //Initiate interval to poll every 3 seconds until completed
     var interval = setInterval(async function() {
       pollResult = await axios.get(
-        `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02/poll?adult=1&index=${lastReceivedDeparturesCount}`,
+        `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02/poll?adult=1&index=${receivedDeparturesCount}`,
         config
       );
 
-      lastReceivedDeparturesCount =
-        searchResult.data.departures.length === 0
-          ? lastReceivedDeparturesCount
-          : searchResult.data.departures.length;
+      receivedDeparturesCount += pollResult.data.departures.count;
 
       //update departures,locations,and providers of search result with new results from polling
       searchResult.data.departures.push(...pollResult.data.departures);
