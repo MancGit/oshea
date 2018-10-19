@@ -15,17 +15,24 @@ class Filters extends React.Component {
     return (
       <div className="d-flex justify-content-between my-3">
         <form className="btn-group btn-group-toggle px-5">
-          <label className="btn btn-lg btn-primary">
+          <label
+            className={`btn btn-lg btn-primary ${
+              this.props.sortBy === "earliest" ? "active" : ""
+            }`}
+          >
             <input
               type="radio"
               value="earliest"
               checked={this.props.sortBy === "earliest"}
-              active
               onChange={this.handleSortChange}
             />
             Earliest
           </label>
-          <label className="btn btn-lg btn-primary">
+          <label
+            className={`btn btn-lg btn-primary ${
+              this.props.sortBy === "latest" ? "active" : ""
+            }`}
+          >
             <input
               type="radio"
               value="latest"
@@ -34,7 +41,11 @@ class Filters extends React.Component {
             />
             Latest
           </label>
-          <label className="btn btn-lg btn-primary">
+          <label
+            className={`btn btn-lg btn-primary ${
+              this.props.sortBy === "cheapest" ? "active" : ""
+            }`}
+          >
             <input
               type="radio"
               value="cheapest"
@@ -43,7 +54,11 @@ class Filters extends React.Component {
             />
             Cheapest
           </label>
-          <label className="btn btn-lg btn-primary">
+          <label
+            className={`btn btn-lg btn-primary ${
+              this.props.sortBy === "fastest" ? "active" : ""
+            }`}
+          >
             <input
               type="radio"
               value="fastest"
