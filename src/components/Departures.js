@@ -16,7 +16,7 @@ class Departures extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-  departures: getDepartures(state.departures, state.filters.sortBy),
+  departures: getDepartures(state.search, state.filters.sortBy),
   sortBy: state.filters.sortBy
 });
 

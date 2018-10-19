@@ -8,12 +8,12 @@ import {
   setSearchFinalised,
   setSearchInitiated
 } from "../actions/searchStatus";
-import { getDepartures } from "../actions/departures";
+import { searchDepartures } from "../actions/search";
 import Filters from "./Filters";
 
 class Onboarding extends Component {
   handleSearch = props => {
-    this.props.getDepartures();
+    this.props.searchDepartures();
   };
 
   render() {
@@ -51,7 +51,7 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   {
-    getDepartures,
+    searchDepartures,
     setSearchFinalised,
     setSearchInitiated
   }

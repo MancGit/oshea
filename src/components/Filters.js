@@ -79,7 +79,7 @@ class Filters extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  departures: getDepartures(state.departures, state.filters.sortBy),
+  departures: getDepartures(state.search, state.filters.sortBy),
   sortBy: state.filters.sortBy
 });
 

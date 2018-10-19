@@ -1,6 +1,7 @@
-import { GET_DEPARTURES } from "./types";
+import { SEARCH_DEPARTURES } from "./types";
+import { SET_SEARCH_INITIATED } from "./types";
+import { SET_SEARCH_FINALISED } from "./types";
 import axios from "axios";
-import moment from "moment";
 
 let config = {
   headers: {
@@ -10,19 +11,8 @@ let config = {
   }
 };
 
-const dispatchSearchInitiated = payload => {};
-
-const dispatchSearchFinished = payload => {};
-
-export const getDepartures = () => async dispatch => {
-  dispatch({
-    type: "SET_SEARCH_INITIATED",
-    searchInitiated: true
-  });
-  dispatch({
-    type: "SET_SEARCH_FINALISED",
-    searchFinalised: false
-  });
+export const searchDepartures = () => async dispatch => {
+  dispatchSearchInitiated(dispatch);
 
   let searchResult = await axios.get(
     "https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02?adult=1",
@@ -40,7 +30,7 @@ export const getDepartures = () => async dispatch => {
       );
       lastReceivedDepartures = pollResult.data.departures.length;
 
-      //update departures,locations,and providers of search result
+      //update departures,locations,and providers of search result with new resulting from polling
       searchResult.data.departures.push(...pollResult.data.departures);
       newLocations = pollResult.data.locations.filter(
         location =>
@@ -56,36 +46,41 @@ export const getDepartures = () => async dispatch => {
       );
       searchResult.data.operators.push(...newOperators);
 
+      //set state and break from interval if search finished
       if (pollResult.data.complete) {
-        dispatch({
-          type: GET_DEPARTURES,
-          payload: searchResult.data
-        });
-
-        dispatch({
-          type: "SET_SEARCH_INITIATED",
-          searchInitiated: false
-        });
-        dispatch({
-          type: "SET_SEARCH_FINALISED",
-          searchFinalised: true
-        });
+        dispatchSearchFinalised(dispatch, searchResult.data);
         clearInterval(interval);
       }
     }, 5000);
   } else {
-    dispatch({
-      type: GET_DEPARTURES,
-      payload: searchResult.data
-    });
-
-    dispatch({
-      type: "SET_SEARCH_INITIATED",
-      searchInitiated: false
-    });
-    dispatch({
-      type: "SET_SEARCH_FINALISED",
-      searchFinalised: true
-    });
+    //set state if search finished
+    dispatchSearchFinalised(dispatch, searchResult.data);
   }
+};
+
+const dispatchSearchInitiated = dispatch => {
+  dispatch({
+    type: SET_SEARCH_INITIATED,
+    searchInitiated: true
+  });
+  dispatch({
+    type: SET_SEARCH_FINALISED,
+    searchFinalised: false
+  });
+};
+
+const dispatchSearchFinalised = (dispatch, payload) => {
+  dispatch({
+    type: SEARCH_DEPARTURES,
+    payload
+  });
+
+  dispatch({
+    type: SET_SEARCH_INITIATED,
+    searchInitiated: false
+  });
+  dispatch({
+    type: SET_SEARCH_FINALISED,
+    searchFinalised: true
+  });
 };
