@@ -69,13 +69,16 @@ class Filters extends React.Component {
           </label>
         </form>
 
-        <p className="text-center text-secondary px-5">Results</p>
+        <p className="text-center text-secondary px-5">
+          {this.props.departures.length} Results
+        </p>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
+  departures: state.departures,
   sortBy: state.filters.sortBy
 });
 
