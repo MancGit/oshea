@@ -31,7 +31,7 @@ export const searchDepartures = () => async dispatch => {
         config
       );
 
-      receivedDeparturesCount += pollResult.data.departures.count;
+      receivedDeparturesCount += pollResult.data.departures.length;
 
       //update departures,locations,and providers of search result with new results from polling
       searchResult.data.departures.push(...pollResult.data.departures);
