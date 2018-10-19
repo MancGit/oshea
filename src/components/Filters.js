@@ -13,7 +13,7 @@ class Filters extends React.Component {
 
   render() {
     return (
-      <div className="d-flex justify-content-between mb-3">
+      <div className="d-flex justify-content-between my-3">
         <form className="btn-group btn-group-toggle px-5">
           <label className="btn btn-lg btn-primary">
             <input
@@ -54,9 +54,7 @@ class Filters extends React.Component {
           </label>
         </form>
 
-        <p className="text-center text-secondary px-5">
-          {this.props.length} Results
-        </p>
+        <p className="text-center text-secondary px-5">Results</p>
       </div>
     );
   }

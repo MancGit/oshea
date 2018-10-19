@@ -51,6 +51,12 @@ const Departure = props => {
             </span>
           </div>
         </div>
+        <div className="row text-secondary px-4 pt-1">
+          <i className="fas fa-bus p-1" />
+          <span>
+            {(duration / 60) | 0}h {duration % 60 | 0}m
+          </span>
+        </div>
       </div>
     </div>
   );

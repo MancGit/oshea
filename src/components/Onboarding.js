@@ -9,6 +9,7 @@ import {
   setSearchInitiated
 } from "../actions/searchStatus";
 import { getDepartures } from "../actions/departures";
+import Filters from "./Filters";
 
 class Onboarding extends Component {
   handleSearch = props => {
@@ -22,6 +23,8 @@ class Onboarding extends Component {
       this.props.setSearchFinalised(true);
     }, 3000);
   };
+
+  handleSort = props => {};
 
   render() {
     return (
@@ -37,7 +40,12 @@ class Onboarding extends Component {
           </div>
         </div>
         {this.props.searchInitiated && <Loading />}
-        {this.props.searchFinalised && <Departures />}
+        {this.props.searchFinalised && (
+          <div>
+            <Filters />
+            <Departures />
+          </div>
+        )}
       </div>
     );
   }
