@@ -1,6 +1,6 @@
 const departuresReducerDefaultState = [];
 
-const expenseReducer = (state = departuresReducerDefaultState, action) => {
+const departuresReducer = (state = departuresReducerDefaultState, action) => {
   switch (action.type) {
     case "GET_DEPARTURES":
       return action.payload;
@@ -9,4 +9,4 @@ const expenseReducer = (state = departuresReducerDefaultState, action) => {
   }
 };
 
-export default expenseReducer;
+export default departuresReducer;

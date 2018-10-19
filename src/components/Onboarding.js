@@ -13,18 +13,8 @@ import Filters from "./Filters";
 
 class Onboarding extends Component {
   handleSearch = props => {
-    //Here must dispatch action to get departures
-    //this.props.setSearchInitiated(true);
     this.props.getDepartures();
-    //this.props.setSearchFinalised(false);
-
-    // setTimeout(() => {
-    //   this.props.setSearchInitiated(false);
-    //   this.props.setSearchFinalised(true);
-    // }, 3000);
   };
-
-  handleSort = props => {};
 
   render() {
     return (

@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import { setSortBy } from "../actions/filters";
+import getDepartures from "../selectors/departures";
 
 class Filters extends React.Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Filters extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  departures: state.departures,
+  departures: getDepartures(state.departures, state.filters.sortBy),
   sortBy: state.filters.sortBy
 });
 
