@@ -8,7 +8,7 @@ class Departures extends Component {
     return (
       <div className="container mt-3">
         {this.props.departures.map(departure => (
-          <Departure departure={departure} />
+          <Departure key={departure.id} departure={departure} />
         ))}
       </div>
     );

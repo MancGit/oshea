@@ -2,6 +2,7 @@ import moment from "moment";
 
 const getDepartures = (searchResult, sortBy) => {
   const departures = searchResult.departures.map(departure => ({
+    id: departure.busbud_departure_id,
     departureTime: moment(Date.parse(departure.departure_time)).valueOf(),
     arrivalTime: moment(Date.parse(departure.arrival_time)).valueOf(),
     duration: departure.duration,
