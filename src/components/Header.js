@@ -15,15 +15,15 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="text-white text-center">
+      <div className="container text-white text-center">
         <select
-          id="lang"
+          id="locale"
           value={this.state.locale}
           onChange={this.onChangeLanguage}
-          className="form-control form-control-lg"
+          className="form-control ml-auto"
         >
-          <option value="en">English</option>
-          <option value="fr">Français</option>
+          <option value="en">En</option>
+          <option value="fr">Fr</option>
         </select>
 
         <h1 className="mt-0">
