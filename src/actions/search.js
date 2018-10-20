@@ -36,24 +36,42 @@ export const searchDepartures = () => async dispatch => {
       //update departures,locations,and providers of search result with new results from polling
       searchResult.data.departures.push(...pollResult.data.departures);
 
-      newLocations = pollResult.data.locations.filter(
-        location =>
-          searchResult.data.locations.filter(o => o.id !== location.id).length >
-          0
-      );
-      searchResult.data.locations.push(...newLocations);
+      //Check if new locations, and operators are already existing from previous queries
+      if (
+        pollResult.data.locations.length > 0 &&
+        searchResult.data.locations.length
+      ) {
+        newLocations = pollResult.data.locations.filter(
+          newLocation =>
+            searchResult.data.locations.filter(
+              location => location.id !== newLocation.id
+            ).length > 0
+        );
+        searchResult.data.locations.push(...newLocations);
+      }
 
-      newOperators = pollResult.data.operators.filter(
-        operator =>
-          searchResult.data.operators.filter(o => o.id !== operator.id).length >
-          0
-      );
-      searchResult.data.operators.push(...newOperators);
+      if (
+        pollResult.data.locations.length > 0 &&
+        searchResult.data.locations.length
+      ) {
+        console.log("Current Operators", searchResult.data.operators);
+        console.log("New Operators", pollResult.data.operators);
+
+        newOperators = pollResult.data.operators.filter(
+          newOperator =>
+            searchResult.data.operators.filter(
+              operator => operator.id !== newOperator.id
+            ).length > 0
+        );
+        console.log("New Unique Operators", newOperators);
+        searchResult.data.operators.push(...newOperators);
+        console.log("New total Operators", searchResult.data.operators);
+      }
 
       //set state and break from interval if search finished
       if (pollResult.data.complete) {
-        dispatchSearchFinalised(dispatch, searchResult.data);
         clearInterval(interval);
+        dispatchSearchFinalised(dispatch, searchResult.data);
       }
     }, 3000);
   } else {

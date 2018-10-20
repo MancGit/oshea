@@ -28,7 +28,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                value={this.state.departureCity}
+                defaultValue={this.state.departureCity}
               />
             </div>
           </div>
@@ -44,7 +44,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                value={this.state.destinationCity}
+                defaultValue={this.state.destinationCity}
               />
             </div>
           </div>
@@ -61,7 +61,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                value={this.state.departureDate}
+                defaultValue={this.state.departureDate}
               />
             </div>
           </div>
@@ -77,7 +77,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                value={`${this.state.passengers} Passenger`}
+                defaultValue={`${this.state.passengers} Passenger`}
               />
             </div>
           </div>

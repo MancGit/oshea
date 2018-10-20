@@ -15,60 +15,62 @@ class Filters extends React.Component {
   render() {
     return (
       <div className="d-flex justify-content-between my-3">
-        <form className="btn-group btn-group-toggle px-2">
-          <label
-            className={`btn btn-lg btn-primary ${
-              this.props.sortBy === "earliest" ? "active" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              value="earliest"
-              checked={this.props.sortBy === "earliest"}
-              onChange={this.handleSortChange}
-            />
-            Earliest
-          </label>
-          <label
-            className={`btn btn-lg btn-primary ${
-              this.props.sortBy === "latest" ? "active" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              value="latest"
-              checked={this.props.sortBy === "latest"}
-              onChange={this.handleSortChange}
-            />
-            Latest
-          </label>
-          <label
-            className={`btn btn-lg btn-primary ${
-              this.props.sortBy === "cheapest" ? "active" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              value="cheapest"
-              checked={this.props.sortBy === "cheapest"}
-              onChange={this.handleSortChange}
-            />
-            Cheapest
-          </label>
-          <label
-            className={`btn btn-lg btn-primary ${
-              this.props.sortBy === "fastest" ? "active" : ""
-            }`}
-          >
-            <input
-              type="radio"
-              value="fastest"
-              checked={this.props.sortBy === "fastest"}
-              onChange={this.handleSortChange}
-            />
-            Fastest
-          </label>
-        </form>
+        {this.props.departures.length > 0 && (
+          <form className="btn-group btn-group-toggle px-2">
+            <label
+              className={`btn btn-lg btn-primary ${
+                this.props.sortBy === "earliest" ? "active" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                value="earliest"
+                checked={this.props.sortBy === "earliest"}
+                onChange={this.handleSortChange}
+              />
+              Earliest
+            </label>
+            <label
+              className={`btn btn-lg btn-primary ${
+                this.props.sortBy === "latest" ? "active" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                value="latest"
+                checked={this.props.sortBy === "latest"}
+                onChange={this.handleSortChange}
+              />
+              Latest
+            </label>
+            <label
+              className={`btn btn-lg btn-primary ${
+                this.props.sortBy === "cheapest" ? "active" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                value="cheapest"
+                checked={this.props.sortBy === "cheapest"}
+                onChange={this.handleSortChange}
+              />
+              Cheapest
+            </label>
+            <label
+              className={`btn btn-lg btn-primary ${
+                this.props.sortBy === "fastest" ? "active" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                value="fastest"
+                checked={this.props.sortBy === "fastest"}
+                onChange={this.handleSortChange}
+              />
+              Fastest
+            </label>
+          </form>
+        )}
 
         <p className="text-center text-secondary px-2 d-none d-sm-block">
           {this.props.departures.length} Results

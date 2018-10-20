@@ -1,8 +1,9 @@
 import moment from "moment";
+import uuid from "uuid";
 
 const getDepartures = (searchResult, sortBy) => {
   const departures = searchResult.departures.map(departure => ({
-    id: departure.busbud_departure_id,
+    id: uuid(),
     departureTime: moment(Date.parse(departure.departure_time)).valueOf(),
     arrivalTime: moment(Date.parse(departure.arrival_time)).valueOf(),
     duration: departure.duration,
@@ -26,14 +27,17 @@ const getDepartures = (searchResult, sortBy) => {
   }));
 
   return departures.sort((a, b) => {
-    if (sortBy === "earliest") {
-      return a.departureTime < b.departureTime ? -1 : 1;
-    } else if (sortBy === "latest") {
-      return a.departureTime > b.departureTime ? -1 : 1;
-    } else if (sortBy === "cheapest") {
-      return a.price < b.price ? -1 : 1;
-    } else if (sortBy === "fastest") {
-      return a.duration < b.duration ? -1 : 1;
+    switch (sortBy) {
+      case "earliest":
+        return a.departureTime < b.departureTime ? -1 : 1;
+      case "latest":
+        return a.departureTime > b.departureTime ? -1 : 1;
+      case "cheapest":
+        return a.price < b.price ? -1 : 1;
+      case "fastest":
+        return a.duration < b.duration ? -1 : 1;
+      default:
+        return a.departureTime < b.departureTime ? -1 : 1;
     }
   });
 };
