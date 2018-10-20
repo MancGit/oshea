@@ -11,61 +11,55 @@ let config = {
   }
 };
 
-export const searchDepartures = () => async dispatch => {
-  dispatchSearchInitiated(dispatch);
+let passengers = 0;
 
+export const searchDepartures = () => async dispatch => {
+  passengers++;
+  dispatchSearchInitiated(dispatch);
+  let searchResult = await search();
+  dispatchSearchFinalised(dispatch, searchResult.data);
+};
+
+//Action Helpers
+
+//Search will initiate search and will initiate poll if not completed
+const search = async () => {
   let searchResult = await axios.get(
-    "https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02?adult=1",
+    `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02?adult=${passengers}`,
     config
   );
 
-  let receivedDeparturesCount = searchResult.data.departures.length;
-
-  if (!searchResult.data.complete) {
-    let pollResult, newLocations, newOperators;
-
-    //Initiate interval to poll every 3 seconds until completed
-    var interval = setInterval(async function() {
-      pollResult = await axios.get(
-        `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02/poll?adult=1&index=${receivedDeparturesCount}`,
-        config
-      );
-
-      receivedDeparturesCount += pollResult.data.departures.length;
-
-      //update departures,locations,and providers of search result with new results from polling
-      searchResult.data.departures.push(...pollResult.data.departures);
-
-      //Check if new locations, and operators are already existing from previous queries
-      if (pollResult.data.locations.length > 0 && searchResult.data.locations) {
-        newLocations = pollResult.data.locations.filter(
-          newLocation =>
-            searchResult.data.locations.filter(
-              location => location.id !== newLocation.id
-            ).length > 0
-        );
-        searchResult.data.locations.push(...newLocations);
-      }
-
-      if (pollResult.data.operators.length > 0 && searchResult.data.operators) {
-        newOperators = pollResult.data.operators.filter(
-          newOperator =>
-            searchResult.data.operators.filter(
-              operator => operator.id !== newOperator.id
-            ).length > 0
-        );
-        searchResult.data.operators.push(...newOperators);
-      }
-
-      //set state and break from interval if search finished
-      if (pollResult.data.complete) {
-        clearInterval(interval);
-        dispatchSearchFinalised(dispatch, searchResult.data);
-      }
-    }, 3000);
+  if (searchResult.data.complete) {
+    return searchResult;
   } else {
-    //set state if search finished
-    dispatchSearchFinalised(dispatch, searchResult.data);
+    let newSearchResult = await poll(searchResult);
+    return newSearchResult;
+  }
+};
+
+//Poll will recursively poll every 3 seconds until completed
+const poll = async searchResult => {
+  //Wait 3 seconds before polling
+  await new Promise(resolve => {
+    setTimeout(() => resolve("done"), 3000);
+  });
+
+  let pollResult = await axios.get(
+    `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02/poll?adult=1&index=${
+      searchResult.data.departures.length
+    }`,
+    config
+  );
+
+  searchResult.data.departures.push(...pollResult.data.departures);
+  searchResult.data.locations.push(...pollResult.data.locations);
+  searchResult.data.operators.push(...pollResult.data.operators);
+
+  if (pollResult.data.complete) {
+    return searchResult;
+  } else {
+    let newSearchResult = await poll(searchResult);
+    return newSearchResult;
   }
 };
 
