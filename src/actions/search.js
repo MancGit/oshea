@@ -51,8 +51,8 @@ export const searchDepartures = () => async dispatch => {
       }
 
       if (
-        pollResult.data.locations.length > 0 &&
-        searchResult.data.locations.length
+        pollResult.data.operators.length > 0 &&
+        searchResult.data.operators.length
       ) {
         console.log("Current Operators", searchResult.data.operators);
         console.log("New Operators", pollResult.data.operators);
