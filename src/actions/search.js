@@ -2,32 +2,19 @@ import { SEARCH_DEPARTURES } from "./types";
 import { SET_SEARCH_INITIATED } from "./types";
 import { SET_SEARCH_FINALISED } from "./types";
 import axios from "axios";
-
-let config = {
-  headers: {
-    Accept:
-      "application/vnd.busbud+json; version=2; profile=https://schema.busbud.com/v2/",
-    "X-Busbud-Token": "PARTNER_AHm3M6clSAOoyJg4KyCg7w"
-  }
-};
-
-let passengers = 0;
+import { config, urls } from "../config/api";
 
 export const searchDepartures = () => async dispatch => {
-  passengers++;
   dispatchSearchInitiated(dispatch);
   let searchResult = await search();
   dispatchSearchFinalised(dispatch, searchResult.data);
 };
 
-//Action Helpers
+/* Action Helpers */
 
-//Search will initiate search and will initiate poll if not completed
+//Search will initiate search and then initiate poll if not completed
 const search = async () => {
-  let searchResult = await axios.get(
-    `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02?adult=${passengers}`,
-    config
-  );
+  let searchResult = await axios.get(urls.search, config);
 
   if (searchResult.data.complete) {
     return searchResult;
@@ -45,9 +32,7 @@ const poll = async searchResult => {
   });
 
   let pollResult = await axios.get(
-    `https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02/poll?adult=1&index=${
-      searchResult.data.departures.length
-    }`,
+    `${urls.poll}&index=${searchResult.data.departures.length}`,
     config
   );
 
