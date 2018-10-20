@@ -3,6 +3,7 @@ import thunk from "redux-thunk";
 import searchReducer from "../reducers/search";
 import searchStatusReducer from "../reducers/searchStatus";
 import filtersReducer from "../reducers/filters";
+import { i18nReducer } from "react-redux-i18n";
 
 export default () => {
   const middleware = [thunk];
@@ -11,7 +12,8 @@ export default () => {
     combineReducers({
       search: searchReducer,
       searchStatus: searchStatusReducer,
-      filters: filtersReducer
+      filters: filtersReducer,
+      i18n: i18nReducer
     }),
     compose(
       applyMiddleware(...middleware),

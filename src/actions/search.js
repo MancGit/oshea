@@ -37,10 +37,7 @@ export const searchDepartures = () => async dispatch => {
       searchResult.data.departures.push(...pollResult.data.departures);
 
       //Check if new locations, and operators are already existing from previous queries
-      if (
-        pollResult.data.locations.length > 0 &&
-        searchResult.data.locations.length
-      ) {
+      if (pollResult.data.locations.length > 0 && searchResult.data.locations) {
         newLocations = pollResult.data.locations.filter(
           newLocation =>
             searchResult.data.locations.filter(
@@ -50,22 +47,14 @@ export const searchDepartures = () => async dispatch => {
         searchResult.data.locations.push(...newLocations);
       }
 
-      if (
-        pollResult.data.operators.length > 0 &&
-        searchResult.data.operators.length
-      ) {
-        console.log("Current Operators", searchResult.data.operators);
-        console.log("New Operators", pollResult.data.operators);
-
+      if (pollResult.data.operators.length > 0 && searchResult.data.operators) {
         newOperators = pollResult.data.operators.filter(
           newOperator =>
             searchResult.data.operators.filter(
               operator => operator.id !== newOperator.id
             ).length > 0
         );
-        console.log("New Unique Operators", newOperators);
         searchResult.data.operators.push(...newOperators);
-        console.log("New total Operators", searchResult.data.operators);
       }
 
       //set state and break from interval if search finished

@@ -1,15 +1,9 @@
 import React from "react";
+const Translate = require("react-redux-i18n").Translate;
 
 export default class Search extends React.Component {
-  state = {
-    departureCity: "New York",
-    destinationCity: "Montreal",
-    departureDate: "Fri,Aug 2",
-    passengers: 1
-  };
-
   handleOnSubmit = () => {
-    this.props.handleSearch(this.state);
+    this.props.handleSearch();
   };
 
   render() {
@@ -28,7 +22,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={this.state.departureCity}
+                defaultValue="New York"
               />
             </div>
           </div>
@@ -44,7 +38,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={this.state.destinationCity}
+                defaultValue="Montreal"
               />
             </div>
           </div>
@@ -61,7 +55,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={this.state.departureDate}
+                defaultValue="2/08/2018"
               />
             </div>
           </div>
@@ -77,7 +71,7 @@ export default class Search extends React.Component {
               <input
                 type="text"
                 className="form-control"
-                defaultValue={`${this.state.passengers} Passenger`}
+                defaultValue="1 Adult"
               />
             </div>
           </div>
@@ -88,9 +82,11 @@ export default class Search extends React.Component {
               onClick={this.handleOnSubmit}
               className="btn btn-orange btn-block btn-lg text-white"
             >
-              {this.props.searchFinalised || this.props.searchInitiated
-                ? "Update"
-                : "Search"}
+              {this.props.searchFinalised || this.props.searchInitiated ? (
+                <Translate value="search.update" />
+              ) : (
+                <Translate value="search.submit" />
+              )}
             </button>
           </div>
         </div>

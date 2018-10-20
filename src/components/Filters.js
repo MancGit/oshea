@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { setSortBy } from "../actions/filters";
 import getDepartures from "../selectors/departures";
+const Translate = require("react-redux-i18n").Translate;
 
 class Filters extends React.Component {
   constructor(props) {
@@ -28,7 +29,7 @@ class Filters extends React.Component {
                 checked={this.props.sortBy === "earliest"}
                 onChange={this.handleSortChange}
               />
-              Earliest
+              <Translate value="filters.earliest" />
             </label>
             <label
               className={`btn btn-lg btn-primary ${
@@ -41,7 +42,7 @@ class Filters extends React.Component {
                 checked={this.props.sortBy === "latest"}
                 onChange={this.handleSortChange}
               />
-              Latest
+              <Translate value="filters.latest" />
             </label>
             <label
               className={`btn btn-lg btn-primary ${
@@ -54,7 +55,7 @@ class Filters extends React.Component {
                 checked={this.props.sortBy === "cheapest"}
                 onChange={this.handleSortChange}
               />
-              Cheapest
+              <Translate value="filters.cheapest" />
             </label>
             <label
               className={`btn btn-lg btn-primary ${
@@ -67,13 +68,13 @@ class Filters extends React.Component {
                 checked={this.props.sortBy === "fastest"}
                 onChange={this.handleSortChange}
               />
-              Fastest
+              <Translate value="filters.fastest" />
             </label>
           </form>
         )}
 
         <p className="text-center text-secondary px-2 d-none d-sm-block">
-          {this.props.departures.length} Results
+          {this.props.departures.length} <Translate value="filters.results" />
         </p>
       </div>
     );
