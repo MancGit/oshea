@@ -8,7 +8,7 @@ export const config = {
 
 export const urls = {
   search:
-    "https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02?adult=1",
+    "https://napi.busbud.com/x-departures/dr5reg/f25dvk/2019-08-02?adult=1",
   poll:
-    "https://napi.busbud.com/x-departures/f25dvk/dr5reg/2019-08-02/poll?adult=1"
+    "https://napi.busbud.com/x-departures/dr5reg/f25dvk/2019-08-02/poll?adult=1"
 };

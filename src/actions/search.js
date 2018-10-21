@@ -1,6 +1,8 @@
-import { SEARCH_DEPARTURES } from "./types";
-import { SET_SEARCH_INITIATED } from "./types";
-import { SET_SEARCH_FINALISED } from "./types";
+import {
+  SEARCH_DEPARTURES,
+  SET_SEARCH_INITIATED,
+  SET_SEARCH_FINALISED
+} from "./types";
 import axios from "axios";
 import { config, urls } from "../config/api";
 

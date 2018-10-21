@@ -8,7 +8,6 @@ class Header extends Component {
     locale: this.props.locale
   };
   onChangeLanguage = e => {
-    console.log(e.target.value);
     this.setState({ locale: e.target.value });
     this.props.setLocale(e.target.value);
   };

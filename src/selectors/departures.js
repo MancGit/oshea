@@ -1,9 +1,7 @@
 import moment from "moment";
-import uuid from "uuid";
 
 const getDepartures = (searchResult, sortBy) => {
   const departures = searchResult.departures.map(departure => ({
-    id: uuid(),
     departureTime: moment(Date.parse(departure.departure_time)).valueOf(),
     arrivalTime: moment(Date.parse(departure.arrival_time)).valueOf(),
     duration: departure.duration,

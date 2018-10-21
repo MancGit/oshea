@@ -1,3 +1,5 @@
+import { SET_SEARCH_INITIATED, SET_SEARCH_FINALISED } from "../actions/types";
+
 const searchStatusReducerDefaultState = {
   searchInitiated: false,
   searchFinalised: false
@@ -8,9 +10,9 @@ const searchStatusReducer = (
   action
 ) => {
   switch (action.type) {
-    case "SET_SEARCH_INITIATED":
+    case SET_SEARCH_INITIATED:
       return { ...state, searchInitiated: action.searchInitiated };
-    case "SET_SEARCH_FINALISED":
+    case SET_SEARCH_FINALISED:
       return { ...state, searchFinalised: action.searchFinalised };
     default:
       return state;
